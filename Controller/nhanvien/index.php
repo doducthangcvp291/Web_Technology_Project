@@ -33,6 +33,18 @@
         require_once('View/nhanvien/add_nhanvien.php'); 
         break;
     }
+    case 'test':{
+      if(isset($_POST['test_array'])){
+         $el = $_POST['newelement'];
+         write_to_console($el);
+         $db->getListIDNVV() ;        
+         //write_to_console($arr);         
+         //$db->insertElementArr($el);
+      }
+      require_once('View/nhanvien/test_array.php'); 
+      break;
+
+    }
 
     case 'edit':{
       require_once('View/nhanvien/edit_nhanvien.php'); 

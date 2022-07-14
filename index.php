@@ -15,6 +15,10 @@
         require_once('Controller/nhanvien/index.php');
         break; 
     }
+    case 'quanli':{
+        require_once('Controller/quanli/index.php');
+        break;
+    }
  }
 
 ?>
