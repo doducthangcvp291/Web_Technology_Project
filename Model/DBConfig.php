@@ -63,9 +63,39 @@
         return $this->console_log($nv);
     }
 
-    public function getListIDNVV(){
-        $sql = "SELECT * FROM shift_nv WHERE ngay = 707 ";
+    public function updateIDNV($new_value){
+        $sql = "UPDATE shift_nv SET list_id_nv='$new_value' WHERE ngay = 707 ";        
         return $this->execute($sql);
+    }
+
+    public function getListIDNVV(){//truyen 1 phan tu moi ( afternoon ) qua tham so 
+        $sql = "SELECT list_id_nv FROM shift_nv WHERE ngay = 707 ";
+        $rs = mysqli_query($this->connect(),$sql);      
+        $nv = mysqli_fetch_object($rs);
+        mysqli_free_result($rs); 
+        $this->console_log('typeof list_id_nv: ');
+        $this->console_log(gettype($nv->list_id_nv));  
+        $this->console_log($nv->list_id_nv);
+        $arr_id = json_decode($nv->list_id_nv);     
+        $this->console_log('typeof arr_id: ');
+        $this->console_log(gettype($arr_id)); 
+        $this->console_log($arr_id); 
+        // $this->console_log(gettype($nv[0]['list_id_nv']));       
+        // $this->console_log($nv[0]['list_id_nv']);       
+        if (in_array('afternoon',$arr_id)){
+            return $this->console_log('Already exist in arr');
+        }
+
+        array_push($arr_id,'afternoon');
+        
+        $this->console_log('after add arr_id: ');
+        $this->console_log($arr_id);
+        $new_arr_id = json_encode($arr_id);
+        $this->console_log('typeof new_arr_id: ');
+        $this->console_log(gettype($new_arr_id)); 
+        $this->console_log($new_arr_id);
+
+        return $this->updateIDNV($new_arr_id) ;
     }
 
 
